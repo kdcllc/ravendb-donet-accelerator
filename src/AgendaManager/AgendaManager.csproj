@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
+      <UserSecretsId>facaac2e-a698-4444-92ee-22b36cae6133</UserSecretsId>
+  </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="RavenDB.Client" Version="6.0.105" />

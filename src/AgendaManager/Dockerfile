@@ -8,15 +8,15 @@ USER app
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG configuration=Release
 WORKDIR /src
-COPY ["AgendaManager/AgendaManager.csproj", "AgendaManager/"]
-RUN dotnet restore "AgendaManager/AgendaManager.csproj"
-COPY . .
+COPY ["../src/AgendaManager/AgendaManager.csproj", "/AgendaManager/"]
+RUN dotnet restore "/AgendaManager/AgendaManager.csproj"
+COPY ../src/ .
 WORKDIR "/src/AgendaManager"
-RUN dotnet build "AgendaManager.csproj" -c $configuration -o /app/build
+RUN dotnet build "/src/AgendaManager/AgendaManager.csproj" -c $configuration -o /app/build
 
 FROM build AS publish
 ARG configuration=Release
-RUN dotnet publish "AgendaManager.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "/src/AgendaManager/AgendaManager.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

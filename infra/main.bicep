@@ -29,7 +29,7 @@ var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 
 resource rg 'Microsoft.Resources/resourceGroups@2022-09-01' = {
-  name: 'rg-${environmentName}'
+  name: '${environmentName}-rg'
   location: location
   tags: tags
 }
@@ -77,6 +77,17 @@ module keyVault './shared/keyvault.bicep' = {
   scope: rg
 }
 
+module storage 'shared/storage.bicep' = {
+  name: '${abbrs.storageStorageAccounts}${resourceToken}'
+  params: {
+    location: location
+    tags: tags
+    storageName: '${abbrs.storageStorageAccounts}${resourceToken}'
+    fileShareName: 'database'
+  }
+  scope: rg
+}
+
 module appsEnv './shared/apps-env.bicep' = {
   name: 'apps-env'
   params: {
@@ -85,6 +96,23 @@ module appsEnv './shared/apps-env.bicep' = {
     tags: tags
     applicationInsightsName: monitoring.outputs.applicationInsightsName
     logAnalyticsWorkspaceName: monitoring.outputs.logAnalyticsWorkspaceName
+    storageAccountKey: storage.outputs.storageAccountKey
+    storageAccountName: storage.outputs.storageAccountName
+    shareName: 'database'
+    containerAppsEnvAzureFile: 'ravendbstorage'
+  }
+  scope: rg
+}
+
+module ravendb './ravendb/container-app.bicep' = {
+  name: 'ravendb'
+  params: {
+    location: location
+    tags: tags
+    containerAppEnvId: appsEnv.outputs.id
+    ravendbDockerImage: 'ravendb/ravendb:6.0.105-ubuntu.22.04-x64'
+    storageName: 'ravendbstorage'
+    volumeName: 'ravendb-volume'
   }
   scope: rg
 }
