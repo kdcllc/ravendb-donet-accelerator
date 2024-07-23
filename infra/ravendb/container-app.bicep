@@ -10,7 +10,7 @@ param ravendbAppName string = 'ravendb'
 param location string = resourceGroup().location
 param ravendbDockerImage string = 'ravendb/ravendb:6.0.105-ubuntu.22.04-x64'
 
-resource ravendbContainerApp 'Microsoft.App/containerApps@2023-05-01' = {
+resource ravendbContainerApp 'Microsoft.App/containerApps@2023-11-02-preview' = {
   name: ravendbAppName
   location: location
   tags: tags
@@ -18,8 +18,16 @@ resource ravendbContainerApp 'Microsoft.App/containerApps@2023-05-01' = {
     managedEnvironmentId: containerAppEnvId
     configuration: {
       ingress: {
+        additionalPortMappings: [
+          {
+            exposedPort: 38888
+            external: false
+            targetPort: 38888
+          }
+        ]
         external: true
         targetPort: 8080
+        
       }
       registries: []
     }
