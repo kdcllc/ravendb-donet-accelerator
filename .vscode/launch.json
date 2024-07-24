@@ -9,6 +9,7 @@
             "program": "${workspaceFolder}/src/AgendaManager/bin/Debug/net8.0/AgendaManager.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/AgendaManager",
+            "justMyCode": false,
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",

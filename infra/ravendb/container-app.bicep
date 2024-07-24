@@ -10,7 +10,7 @@ param ravendbAppName string = 'ravendb'
 param location string = resourceGroup().location
 param ravendbDockerImage string = 'ravendb/ravendb:6.0.105-ubuntu.22.04-x64'
 
-resource ravendbContainerApp 'Microsoft.App/containerApps@2023-11-02-preview' = {
+resource app 'Microsoft.App/containerApps@2023-11-02-preview' = {
   name: ravendbAppName
   location: location
   tags: tags
@@ -89,3 +89,6 @@ resource ravendbContainerApp 'Microsoft.App/containerApps@2023-11-02-preview' = 
     }
   }
 }
+
+
+output uri string = 'https://${app.properties.configuration.ingress.fqdn}'

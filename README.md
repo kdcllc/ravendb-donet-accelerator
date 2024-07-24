@@ -20,6 +20,26 @@ Version pinged to `6.0.105`
 2. Run the project `dotnet run --project src/AgendaManager/AgendaManager.csproj` and it will create a new database called **"Productivity"** and index **Agendas**.
 
 
+## Deploying to Azure
+
+1. Download and install [`azd cli` (azure developer cli)](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd)
+
+
+2. Run `azd up` follow the steps to create Azure Resources.
+
+### Azure Resources Created
+
+| Resource Type | Resource Name |
+| ------------- | ------------- |
+| Resource Group | `${environmentName}-rg` |
+| Log Analytics Workspace | `${abbrs.operationalInsightsWorkspaces}${resourceToken}` |
+| Application Insights | `${abbrs.insightsComponents}${resourceToken}` |
+| Container Registry | `${abbrs.containerRegistryRegistries}${resourceToken}` |
+| Key Vault | `${abbrs.keyVaultVaults}${resourceToken}` |
+| Storage Account | `${abbrs.storageStorageAccounts}${resourceToken}` |
+| Container Apps Environment | `${abbrs.appManagedEnvironments}${resourceToken}` |
+| RavenDB Container App | `ravendb` |
+| Agenda Manager Container App | `${abbrs.appContainerApps}agendamanage-${resourceToken}` |
 
 ## Advantages to RavenDB
 

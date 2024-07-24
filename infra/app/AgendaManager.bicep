@@ -2,6 +2,8 @@ param name string
 param location string = resourceGroup().location
 param tags object = {}
 
+param ravenDbConnectinString string
+
 param identityName string
 param containerRegistryName string
 param containerAppsEnvironmentName string
@@ -103,7 +105,7 @@ resource app 'Microsoft.App/containerApps@2023-05-02-preview' = {
             }
             {
               name: 'CONNECTIONSTRINGS__SERVER'
-              value: 'http://ravendb:8080'
+              value: ravenDbConnectinString
             }
           ],
           env,

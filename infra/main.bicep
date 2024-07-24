@@ -129,6 +129,7 @@ module agendaManager './app/AgendaManager.bicep' = {
     containerRegistryName: registry.outputs.name
     exists: agendaManagerExists
     appDefinition: agendaManagerDefinition
+    ravenDbConnectinString: ravendb.outputs.uri
   }
   scope: rg
 }
