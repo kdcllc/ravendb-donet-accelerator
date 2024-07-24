@@ -1,6 +1,11 @@
 # RavenDb DotNetCore Accelerator for POC Projects with Azure Container Apps
 
+[![GitHub](https://img.shields.io/github/license/kdcllc/ravendb-donet-accelerator.svg)](https://github.com/kdcllc/ravendb-donet-accelerator/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/kdcllc/ravendb-donet-accelerator.svg?style=social)](https://github.com/kdcllc/ravendb-donet-accelerator/stargazers)
+
 This repository provides a complete accelerator for Proof of Concept (POC) projects using RavenDB and ASP.NET Core, deployed with Azure Container Apps.
+
+![I stand with Israel](./images/IStandWithIsrael.png)
 
 ## Overview
 
@@ -9,6 +14,16 @@ This accelerator is designed to help you quickly set up a RavenDB-backed ASP.NET
 - A sample Agenda Manager application (a simple todo app)
 - Integration with RavenDB for data storage
 - Deployment scripts for Azure Container Apps
+
+## Hire me
+
+Please send [email](mailto:kingdavidconsulting@gmail.com) if you consider to **hire me**.
+
+[![buymeacoffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/vyve0og)
+
+## Give a Star! :star
+
+If you like or are using this project to learn or start your solution, please give it a star. Thanks!
 
 ## Prerequisites
 
