@@ -1,4 +1,4 @@
-# RavenDb DotNetCore Accelerator for POC Projects with Azure Container Apps
+# RavenDb .NET Core Accelerator for POC Projects with Azure Container Apps
 
 [![GitHub](https://img.shields.io/github/license/kdcllc/ravendb-donet-accelerator.svg)](https://github.com/kdcllc/ravendb-donet-accelerator/blob/master/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/kdcllc/ravendb-donet-accelerator.svg?style=social)](https://github.com/kdcllc/ravendb-donet-accelerator/stargazers)
