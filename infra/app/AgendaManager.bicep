@@ -2,6 +2,8 @@ param name string
 param location string = resourceGroup().location
 param tags object = {}
 
+param ravenDbConnectinString string
+
 param identityName string
 param containerRegistryName string
 param containerAppsEnvironmentName string
@@ -71,7 +73,7 @@ resource app 'Microsoft.App/containerApps@2023-05-02-preview' = {
     configuration: {
       ingress:  {
         external: true
-        targetPort: 5158
+        targetPort: 80
         transport: 'auto'
       }
       registries: [
@@ -99,7 +101,11 @@ resource app 'Microsoft.App/containerApps@2023-05-02-preview' = {
             }
             {
               name: 'PORT'
-              value: '5158'
+              value: '80'
+            }
+            {
+              name: 'CONNECTIONSTRINGS__SERVER'
+              value: ravenDbConnectinString
             }
           ],
           env,

@@ -1,50 +1,101 @@
-# Agenda Manager with RavenDB and ASP.NET Core
+# RavenDb .NET Core Accelerator for POC Projects with Azure Container Apps
 
-This is a demo application for an Agenda manager (yes, a todo app) that uses ASP.NET Core and RavenDB. 
+[![GitHub](https://img.shields.io/github/license/kdcllc/ravendb-donet-accelerator.svg)](https://github.com/kdcllc/ravendb-donet-accelerator/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/kdcllc/ravendb-donet-accelerator.svg?style=social)](https://github.com/kdcllc/ravendb-donet-accelerator/stargazers)
 
-Version pinged to `6.0.105`
+This repository provides a complete accelerator for Proof of Concept (POC) projects using RavenDB and ASP.NET Core, deployed with Azure Container Apps.
 
-## Running locally
+![I stand with Israel](./images/IStandWithIsrael.png)
 
-1. To get started you'll need to run a RavenDB instance using Docker with the following command:
+## Overview
 
-```bash
-    
-    # create instance of ravendb
+This accelerator is designed to help you quickly set up a RavenDB-backed ASP.NET Core application, ideal for POC projects. It includes:
+
+- A sample Agenda Manager application (a simple todo app)
+- Integration with RavenDB for data storage
+- Deployment scripts for Azure Container Apps
+
+## Hire me
+
+Please send [email](mailto:kingdavidconsulting@gmail.com) if you consider to **hire me**.
+
+[![buymeacoffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/vyve0og)
+
+## Give a Star! :star
+
+If you like or are using this project to learn or start your solution, please give it a star. Thanks!
+
+## Prerequisites
+
+- [.NET SDK 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [Docker](https://www.docker.com/get-started)
+- [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+- [Azure Developer CLI (azd)](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd)
+
+## Running Locally
+
+1. **Start RavenDB using Docker:**
+
+    ```bash
+    # Create instance of RavenDB
     docker-compose up -d ravendb
 
-    # remove instance of ravendb
+    # Remove instance of RavenDB
     docker-compose down ravendb
-```
+    ```
 
-2. Run the project `dotnet run --project src/AgendaManager/AgendaManager.csproj` and it will create a new database called **"Productivity"** and index **Agendas**.
+2. **Run the project:**
 
+    ```bash
+    dotnet run --project src/AgendaManager/AgendaManager.csproj
+    ```
 
+    This will create a new database called **"Productivity"** and an index **Agendas**.
 
-## Advantages to RavenDB
+## Deploying to Azure
 
-- The document model is a great development experience
-- Fine tuning queries with indexes
+1. **Install Azure Developer CLI:**
 
-## RavenDB considerations
+    Download and install [`azd cli`](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd).
 
-- Remembering to create static indexes
-- Those string Ids can be a challenge to work around (See `EncryptedParameter`)
-- Stale results (not an issue in this sample)
+2. **Deploy using `azd up`:**
+
+    Run `azd up` and follow the steps to create Azure Resources.
+
+### Azure Resources Created
+
+| Resource Type                | Resource Name                                      |
+|------------------------------|----------------------------------------------------|
+| Resource Group               | `${environmentName}-rg`                            |
+| Log Analytics Workspace      | `${abbrs.operationalInsightsWorkspaces}${resourceToken}` |
+| Application Insights         | `${abbrs.insightsComponents}${resourceToken}`      |
+| Container Registry           | `${abbrs.containerRegistryRegistries}${resourceToken}` |
+| Key Vault                    | `${abbrs.keyVaultVaults}${resourceToken}`          |
+| Storage Account              | `${abbrs.storageStorageAccounts}${resourceToken}`  |
+| Container Apps Environment   | `${abbrs.appManagedEnvironments}${resourceToken}`  |
+| RavenDB Container App        | `ravendb`                                          |
+| Agenda Manager Container App | `${abbrs.appContainerApps}agendamanage-${resourceToken}` |
+
+## Advantages of Using RavenDB
+
+- **Document Model:** Provides a great development experience.
+- **Indexing:** Allows fine-tuning of queries with indexes.
+
+## Considerations for RavenDB
+
+- **Static Indexes:** Remember to create static indexes.
+- **String IDs:** Can be challenging to work with (see `EncryptedParameter`).
+- **Stale Results:** Not an issue in this sample.
 
 ## Notes
 
-- Created using [JetBrains Rider](https://jetbrains.com/rider)
-- Used JetBrains AI Assistant for some Bootstrap and JQuery stuff
-- RavenDB instance is a development instance so there's no security
-- Application assumes one user but could be made to support multiple users with the addition of identity.
-
+- The RavenDB instance is a development instance with no security.
+- The application assumes a single user but can be extended to support multiple users with identity management.
 
 ## References
 
-- https://learn.microsoft.com/en-us/azure/templates/microsoft.app/2023-05-01/containerapps?pivots=deployment-language-bicep
+- [Azure Container Apps Documentation](https://learn.microsoft.com/en-us/azure/templates/microsoft.app/2023-05-01/containerapps?pivots=deployment-language-bicep)
 
+## Acknowledgements
 
-## Thanks to
-
-- [khalidabuhakmeh](https://github.com/khalidabuhakmeh/RavenDBAgendaManager)
+- Thanks to [khalidabuhakmeh](https://github.com/khalidabuhakmeh/RavenDBAgendaManager) for the original inspiration.

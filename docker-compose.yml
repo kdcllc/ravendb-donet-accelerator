@@ -21,10 +21,11 @@ services:
       - ravendb_data:/var/lib/ravendb/data
 
   agendamanager:
+    # docker-compose up -d agendamanager
     image: agendamanager
     build:
       context: .
-      dockerfile: src/AgendaManager/Dockerfile
+      dockerfile: ./src/AgendaManager/Dockerfile
       args:
         - configuration=Debug
     ports:

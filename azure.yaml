@@ -5,8 +5,8 @@ metadata:
     template: azd-init@1.9.5
 services:
     AgendaManager:
-        project: src/AgendaManager
+        project: ./src/AgendaManager
         host: containerapp
         language: dotnet
         docker:
-            path: Dockerfile
+            path: ./src/AgendaManager/Dockerfile
