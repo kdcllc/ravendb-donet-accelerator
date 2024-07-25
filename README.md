@@ -15,6 +15,8 @@ This accelerator is designed to help you quickly set up a RavenDB-backed ASP.NET
 - Integration with RavenDB for data storage
 - Deployment scripts for Azure Container Apps
 
+> **Note:** This accelerator is designed specifically for Proof of Concept (POC) projects and may not be suitable for production use.
+
 ## Hire me
 
 Please send [email](mailto:kingdavidconsulting@gmail.com) if you consider to **hire me**.
@@ -76,6 +78,15 @@ If you like or are using this project to learn or start your solution, please gi
 | RavenDB Container App        | `ravendb`                                          |
 | Agenda Manager Container App | `${abbrs.appContainerApps}agendamanage-${resourceToken}` |
 
+### Post deployment steps to secure RavenDb
+
+Navigate to Ingress section of `ravendb` Azure Container App in the Azure Container Environment and:
+
+1. Select -> 'Allow traffic from IPs configured below, deny all other traffic'
+2. Click -> 'Add the app's outbound IP address'
+3. Add any other IP address in order to have access to RavenDb.
+![ip restriction mode](./images/ip-restrictions-mode.png)
+
 ## Advantages of Using RavenDB
 
 - **Document Model:** Provides a great development experience.
@@ -95,6 +106,7 @@ If you like or are using this project to learn or start your solution, please gi
 ## References
 
 - [Azure Container Apps Documentation](https://learn.microsoft.com/en-us/azure/templates/microsoft.app/2023-05-01/containerapps?pivots=deployment-language-bicep)
+- [Connect applications in Azure Container Apps: Call a container app by name](https://learn.microsoft.com/en-us/azure/container-apps/connect-apps?tabs=bash#call-a-container-app-by-name)
 
 ## Acknowledgements
 
