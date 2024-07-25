@@ -9,6 +9,9 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
+@description('Name of the ravehdb container app application')
+param ravendbAppName string = 'ravendb'
+
 param agendaManagerExists bool
 @secure()
 param agendaManagerDefinition object
@@ -109,6 +112,7 @@ module ravendb './ravendb/container-app.bicep' = {
   params: {
     location: location
     tags: tags
+    ravendbAppName: ravendbAppName
     containerAppEnvId: appsEnv.outputs.id
     ravendbDockerImage: 'ravendb/ravendb:6.0.105-ubuntu.22.04-x64'
     storageName: 'ravendbstorage'
@@ -129,7 +133,7 @@ module agendaManager './app/AgendaManager.bicep' = {
     containerRegistryName: registry.outputs.name
     exists: agendaManagerExists
     appDefinition: agendaManagerDefinition
-    ravenDbConnectinString: ravendb.outputs.uri
+    ravenDbConnectinString: 'http://${ravendbAppName}'
   }
   scope: rg
 }
